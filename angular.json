@@ -120,6 +120,32 @@
       },
       "tags": [],
       "implicitDependencies": ["app"]
+    },
+    "core-lib": {
+      "projectType": "library",
+      "root": "libs/core-lib",
+      "sourceRoot": "libs/core-lib/src",
+      "prefix": "task-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core-lib"],
+          "options": {
+            "jestConfig": "libs/core-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core-lib/src/**/*.ts",
+              "libs/core-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
