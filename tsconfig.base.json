@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@task-app/core-lib": ["libs/core-lib/src/index.ts"]
+      "@task-app/core-lib": ["libs/core-lib/src/index.ts"],
+      "@task-app/core-lib/guards": ["libs/core-lib/src/lib/guards/index.ts"],
+      "@task-app/core-lib/services": ["libs/core-lib/src/lib/services/index.ts"],
+      "@task-app/core-lib/interfaces": ["libs/core-lib/src/lib/interface/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

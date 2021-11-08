@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'libs/core-lib/src/lib/services/local-storage.service';
-import { Data } from 'libs/core-lib/src/lib/interface/user-info';
+import { LocalStorageService, Data } from '@task-app/core-lib';
 @Component({
   selector: 'task-app-password',
   templateUrl: './password.component.html',
