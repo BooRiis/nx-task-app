@@ -1,0 +1,20 @@
+<header>
+    <!--logo a nadpis-->
+    <div class="logo"></div>
+    <!--Meno hrdinu-->
+<p>John Cena</p>
+</header>
+<main>
+<div class="main-content"></div>
+<h6>Welcome to testing <br/>
+assigment at ZENTITY.</h6>
+</main>
+<footer>
+<div *ngIf="onboarded">
+    <button (click)='goToProfile()'>Profile</button>
+</div>
+
+<button *ngIf="!onboarded" (click)="goStart()" class="main__button">
+Start
+</button>
+</footer>

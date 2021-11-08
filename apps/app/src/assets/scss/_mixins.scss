@@ -1,0 +1,7 @@
+@function em($size, $context: 16) {
+    @return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+    font-size: em($size, $context);
+}

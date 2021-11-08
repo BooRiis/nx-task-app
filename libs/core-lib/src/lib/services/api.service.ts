@@ -10,7 +10,7 @@ import {Data} from '../interface/user-info'
 })
 export class ApiService {
 
-  private url= 'data.json'
+  public url= 'data.json'
   constructor(private http: HttpClient) { }
 
   getConfig() {

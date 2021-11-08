@@ -1,0 +1,18 @@
+<header>
+    <div class="logo"></div>
+    <p>John Cena</p>
+    </header>
+    <main>
+    <div class="main-content-username"></div>
+    <h6>Start by setting up<br/>
+    your username.</h6>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <input formControlName="displayName" type="text" placeholder="Here, please!" /><br>
+        <button class="second__button" type="submit">
+            <span class="button__text">Continue</span>
+        </button>
+    </form>
+    </main>
+    <footer>
+    </footer>
+    
