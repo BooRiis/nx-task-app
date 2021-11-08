@@ -1,9 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'libs/core-lib/src/lib/guards/auth.guard';
-import { OnboardingGuard } from 'libs/core-lib/src/lib/guards/onboarding.guard';
-import { ProfileGuard } from 'libs/core-lib/src/lib/guards/profile.guard';
+import { AuthGuard, OnboardingGuard, ProfileGuard } from '@task-app/core-lib/guards';
 
 const routes: Routes = [
   { path: '', redirectTo: '/introduction', pathMatch: 'full' },
@@ -29,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

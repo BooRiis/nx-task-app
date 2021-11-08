@@ -2,9 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Data, Router } from '@angular/router';
-import { LocalStorageService } from 'libs/core-lib/src/lib/services/local-storage.service';
-import { DataJsonService} from 'libs/core-lib/src/lib/services/data-json.service';
-import { ApiService } from 'libs/core-lib/src/lib/services/api.service';
+import { LocalStorageService, DataJsonService, ApiService } from '@task-app/core-lib';
 
 
 @Component({

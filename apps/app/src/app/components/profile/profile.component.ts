@@ -1,9 +1,9 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit } from '@angular/core';
-import { Data, User, Contact, LocationElement, Address, SocialNetwork } from 'libs/core-lib/src/lib/interface/user-info';
-import { AuthService } from 'libs/core-lib/src/lib/services/auth.service';
-import {ApiService} from 'libs/core-lib/src/lib/services/api.service'
-import { LocalStorageService } from 'libs/core-lib/src/lib/services/local-storage.service';
+import { 
+  Data, User, Contact, LocationElement, Address, SocialNetwork,
+  AuthService, ApiService, LocalStorageService
+ } from '@task-app/core-lib';
 import { Router } from '@angular/router';
 
 @Component({
