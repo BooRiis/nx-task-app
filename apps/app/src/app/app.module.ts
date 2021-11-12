@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   CoreLibModule
 } from '@task-app/core-lib'
+import { StoreModule } from '@ngrx/store';
+import { taskReducer } from './state/task.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,7 +22,12 @@ import {
   FormsModule,
   ReactiveFormsModule,
   HttpClientModule,
-  CoreLibModule
+  CoreLibModule,
+  StoreModule.forRoot({task: taskReducer}),
+  StoreDevtoolsModule.instrument({
+    maxAge: 25, // Retains last 25 states
+    logOnly: environment.production,
+  })
   ],
   bootstrap: [AppComponent],
 })
