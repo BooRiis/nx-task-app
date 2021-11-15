@@ -7,7 +7,15 @@ import {
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
- import { getAddress, getContact, getSocials, getUser } from '@task-app/core-lib/state';
+import { 
+  getAddress,
+  getContact, 
+  getSocials,
+  getUser,
+  ITaskDataState,
+  changeProfile,
+} from '@task-app/core-lib/state';
+
 @Component({
   selector: 'task-app-profile',
   templateUrl: './profile.component.html',
@@ -28,14 +36,17 @@ export class ProfileComponent implements OnInit {
     private api: ApiService,
     private route: Router,
     private localStorage: LocalStorageService,
-    private store: Store<{task: Data}>
+    private store: Store<{task: ITaskDataState}>
     ) {
       this.isAuth = this.authService.getAuth();
     }
     
     ngOnInit(): void {
       //this.showConfig()
-      this.store.pipe(select(getUser)).subscribe(data => this.user = data)
+      this.store.pipe(select(getUser)).subscribe(data => {
+        console.log('user', data)
+        this.user = data
+      })
       this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
       this.store.pipe(select(getAddress)).subscribe(data => this.addres = data)
       this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
@@ -59,6 +70,13 @@ export class ProfileComponent implements OnInit {
     .then(() => {
       window.location.reload()
     })
+  }
+
+  onDisplayNameEdit = (value: string): void => {
+    this.store.dispatch(changeProfile({ profileType: 'displayName', value}))
+  }
+  onPhoneEdit = (value: string): void => {
+    this.store.dispatch(changeProfile({ profileType: 'phone', value}))
   }
   
 

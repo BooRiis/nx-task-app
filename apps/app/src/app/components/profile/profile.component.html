@@ -1,6 +1,6 @@
 <div class="profile-form">
 
-    <form class="user-form">
+    <div class="user-form">
         <div class="user-profile">
             <div class="logo"></div>
             <div class="avatar"></div>
@@ -17,7 +17,7 @@
         <div class="user-info">
             <small>Username</small><br>
             <span>{{user?.displayName}}</span>
-            <button class="edit-btn">Edit</button>
+            <button (click)="onDisplayNameEdit('panBozsky')" class="edit-btn">Edit</button>
         </div>
         <div class="user-info">
             <small>Address</small><br>
@@ -46,7 +46,7 @@
         <div class="user-info">
             <small>Phone</small><br>
             <span>{{contact?.phoneNumber}}</span>
-            <button class="edit-btn">Edit</button>
+            <button (click)="onPhoneEdit('112233')" class="edit-btn">Edit</button>
             <button class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
@@ -58,7 +58,7 @@
         <div class="user-info">
             <a [href]="socialNetwork?.url" class="socials"></a>
         </div>
-    </form>
+    </div>
     <footer>
         <button class="second__button logout-btn" (click)="logout()" routerLink="../username">
             Logout
