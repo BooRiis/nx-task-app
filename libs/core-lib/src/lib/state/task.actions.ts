@@ -30,6 +30,6 @@ export const isOnboarded = createAction(
 )
 
 export const changeProfile = createAction(
-    '[Profile change username]',
+    '[Profile change]',
     props<{ profileType: string, value: string}>()
 )

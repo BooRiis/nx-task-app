@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit {
     ngOnInit(): void {
       //this.showConfig()
       this.store.pipe(select(getUser)).subscribe(data => {
-        console.log('user', data)
         this.user = data
       })
       this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
