@@ -16,7 +16,7 @@ import { AuthGuard, ProfileGuard, OnboardingGuard} from './guards'
     ApiService,
     DataJsonService,
     ProfileGuard,
-    OnboardingGuard
+    OnboardingGuard,
   ],
 })
 export class CoreLibModule {}

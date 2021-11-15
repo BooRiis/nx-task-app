@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import {Data} from '../interface/user-info'
-
+import {map} from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,11 @@ export class ApiService {
   public url= 'data.json'
   constructor(private http: HttpClient) { }
 
-  getConfig() {
+  getConfig(url: string) {
+    return this.http.get<Data>(this.url)
+  }
+
+  isOnboarded(isOnboarded: boolean) {
     return this.http.get<Data>(this.url)
   }
 

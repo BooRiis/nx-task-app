@@ -2,7 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Data, Router } from '@angular/router';
-import { LocalStorageService, DataJsonService, ApiService } from '@task-app/core-lib';
+import { Store } from '@ngrx/store';
+import { LocalStorageService, DataJsonService, ApiService, sendingApiData } from '@task-app/core-lib';
 
 
 @Component({
@@ -14,20 +15,23 @@ export class UsernameComponent implements OnInit {
 
   userData!: Data;
   public loginForm!: FormGroup;
+  private url = 'data.json'
 
   constructor(
     private localStorage: LocalStorageService,
     private formBuilder: FormBuilder,
     private dataJsonService: DataJsonService,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private store: Store<Data>
   ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       displayName: ['']
     })
-    this.dataJsonService.loadJson(this.apiService.url)
+    this.dataJsonService.loadJson(this.url)
+    this.store.dispatch(sendingApiData({url: this.url}))
   }
 
 

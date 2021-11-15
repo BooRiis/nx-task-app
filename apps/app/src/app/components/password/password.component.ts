@@ -2,7 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorageService, Data } from '@task-app/core-lib';
+import { select, Store } from '@ngrx/store';
+import { LocalStorageService, Data, isOnboarded} from '@task-app/core-lib';
 @Component({
   selector: 'task-app-password',
   templateUrl: './password.component.html',
@@ -16,7 +17,8 @@ export class PasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
+    private store: Store<Data>
     ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class PasswordComponent implements OnInit {
         this.passwordLogin.reset();
         this.localStorage.set('access_token', 'jedete');
         this.localStorage.remove('isOnboarded')
+        this.store.dispatch(isOnboarded({onboarded: true}))
         this.router.navigate(['profile'])
       }
     }

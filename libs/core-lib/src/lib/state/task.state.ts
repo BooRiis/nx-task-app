@@ -1,4 +1,4 @@
-import { Data } from "@task-app/core-lib";
+import { Data } from "../interface";
 
 
 

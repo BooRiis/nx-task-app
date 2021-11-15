@@ -10,7 +10,7 @@ import {
   CoreLibModule
 } from '@task-app/core-lib'
 import { StoreModule } from '@ngrx/store';
-import { taskReducer } from './state/task.reducer';
+import { taskReducer } from '@task-app/core-lib/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 @NgModule({

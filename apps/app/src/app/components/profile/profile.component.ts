@@ -7,7 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getTask, getUser } from '../../state/task.selector';
+ import { getAddress, getContact, getSocials, getUser } from '@task-app/core-lib/state';
 @Component({
   selector: 'task-app-profile',
   templateUrl: './profile.component.html',
@@ -16,8 +16,7 @@ import { getTask, getUser } from '../../state/task.selector';
 export class ProfileComponent implements OnInit {
 
   defaultData!: Observable<Data>;
-  //user!: User;
-  user!: Observable<User>;
+  user!: User;
   contact!: Contact;
   location!: LocationElement[]; 
   addres!: Address;
@@ -35,9 +34,11 @@ export class ProfileComponent implements OnInit {
     }
     
     ngOnInit(): void {
-      this.showConfig()
-      this.defaultData = this.store.select(getTask)
-      this.user = this.store.pipe(select(getUser))
+      //this.showConfig()
+      this.store.pipe(select(getUser)).subscribe(data => this.user = data)
+      this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
+      this.store.pipe(select(getAddress)).subscribe(data => this.addres = data)
+      this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
     }
 
   persist(key: string) {
@@ -61,16 +62,16 @@ export class ProfileComponent implements OnInit {
   }
   
 
-  showConfig() {
-    this.api.getConfig()
-    .subscribe((data: Data) => {
-      //this.defaultData = data;
-      //this.user = data.user;
-      this.contact = data.user.contact;
-      this.location = data.user.contact.locations;
-      this.addres = data.user.contact.locations[0].address;
-      this.socialNetwork = data.user.contact.socialNetworks[0];
-    })
-  }
+  // showConfig() {
+  //   this.api.getConfig()
+  //   .subscribe((data: Data) => {
+  //     //this.defaultData = data;
+  //     //this.user = data.user;
+  //     //this.contact = data.user.contact;
+  //     //this.location = data.user.contact.locations;
+  //     //this.addres = data.user.contact.locations[0].address;
+  //     //this.socialNetwork = data.user.contact.socialNetworks[0];
+  //   })
+  // }
 
 }

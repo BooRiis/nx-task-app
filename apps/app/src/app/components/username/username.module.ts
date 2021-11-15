@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UsernameRoutingModule } from './username-routing.module';
 import { UsernameComponent } from './username.component';
+import { EffectsModule } from '@ngrx/effects';
+import { TaskEffects } from '@task-app/core-lib';
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import { UsernameComponent } from './username.component';
     CommonModule,
     UsernameRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forRoot([TaskEffects])
   ]
 })
 export class UsernameModule { }
