@@ -17,42 +17,13 @@ const _taskReducer = createReducer<ITaskDataState>(
         newData.onboarded = onboarded
         return ({ ...state, data: newData })
     }),
-    on(TaskActions.changeProfile, (state, { profileType, value }) => {
-        let newState: ITaskDataState;
-        switch(profileType) {
-            case 'displayName': 
-
-                newState = ({
-                    ...state,
-                    data: {
-                        ...state.data,
-                        user: {
-                            ...state.data.user,
-                            displayName: value
-                        }
-                    }
-                })
-                
-                break;
-            case 'phone': 
-                newState = ({
-                    ...state,
-                    data: {
-                        ...state.data,
-                        user: {
-                            ...state.data.user,
-                            contact: {
-                                ...state.data.user.contact,
-                                phoneNumber: value
-                            }
-                        }
-                    }
-                })
-                break;
-            default: 
-                newState = state;
-        }
-        return ({...state, data: newState.data})
+    on(TaskActions.changeProfile, (state, { user }) => {
+        return ({
+            ...state, 
+                data: {
+                    ...state.data,
+                    user
+                }})
     })
 );
 

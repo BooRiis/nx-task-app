@@ -72,10 +72,23 @@ export class ProfileComponent implements OnInit {
   }
 
   onDisplayNameEdit = (value: string): void => {
-    this.store.dispatch(changeProfile({ profileType: 'displayName', value}))
+    const newUser: User = ({
+      ...this.user,
+      displayName: value
+    })
+    
+    this.store.dispatch(changeProfile({ user: newUser}))
   }
   onPhoneEdit = (value: string): void => {
-    this.store.dispatch(changeProfile({ profileType: 'phone', value}))
+    const newUser: User = ({
+      ...this.user,
+      contact: {
+        ...this.user.contact,
+        phoneNumber: value
+      }
+    })
+
+    this.store.dispatch(changeProfile({ user: newUser}))
   }
   
 
