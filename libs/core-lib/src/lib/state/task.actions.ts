@@ -28,3 +28,8 @@ export const isOnboarded = createAction(
     IS_ONBOARDED,
     props<{onboarded: boolean}>()
 )
+
+export const changeProfile = createAction(
+    '[Profile change]',
+    props<{ profileType: string, value: string}>()
+)
