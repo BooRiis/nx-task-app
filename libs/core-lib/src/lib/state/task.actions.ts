@@ -36,6 +36,6 @@ export const changeProfile = createAction(
 
 
 export const changeLocation = createAction(
-    '[Profile change]',
-    props<{ address: LocationElement}>()
+    '[Profile change location]',
+    props<{ address: LocationElement[]}>()
 )

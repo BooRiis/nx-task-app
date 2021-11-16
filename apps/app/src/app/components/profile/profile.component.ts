@@ -114,7 +114,10 @@ export class ProfileComponent implements OnInit {
       },
     })
 
-    this.store.dispatch(changeLocation({ address: newLocation}))
+    const locations: LocationElement[] = Object.assign([], this.user.contact.locations);
+    locations[0] = newLocation;
+
+    this.store.dispatch(changeLocation({ address: locations}))
   }
   
 
