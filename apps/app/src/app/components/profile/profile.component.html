@@ -1,71 +1,73 @@
 <div class="profile-form">
 
-    <div class="user-form">
+    <form class="user-form" [formGroup]="reactiveForm">
         <div class="user-profile">
             <div class="logo"></div>
             <div class="avatar"></div>
         </div>
         <p>Edit your profile</p>
         <div>
-            <button (click)="goTo('introduction')">Go to Introduction</button>
+            <button type="button" (click)="goTo('introduction')">Go to Introduction</button>
         </div>
         <div class="user-info">
             <small>Name</small><br>
             <span>{{user?.name}} {{user?.surname}}</span>
-            <button class="edit-btn">Edit</button>
+            <button type="button" class="edit-btn">Edit</button>
         </div>
         <div class="user-info">
             <div *ngIf="user?.displayName">
                 <small>Username</small><br>
                 <span>{{user?.displayName}}</span>
-                <button (click)="onDisplayNameEdit('')" class="edit-btn">Edit</button>
+                <button type="submit" (click)="onDisplayNameEdit()" class="edit-btn">Edit</button>
             </div>
             <div *ngIf="!user?.displayName">
-                <input type="text" name="displayName" #displayName="" />
+                <small>Username</small><br>
+                <input type="text" name="displayName" id="DisplayName" formControlName="displayName" />
+                <button type="button" class="edit-btn">Edit</button>
             </div>
         </div>
         <div class="user-info">
             <small>Address</small><br>
             <span> {{address?.streetName}} {{address?.streetNumber}} </span>
-            <button class="edit-btn">Edit</button>
-            <button class="dlt-btn">Delete</button>
+            <button type="button" class="edit-btn">Edit</button>
+            <button type="button" class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>City</small><br>
             <span>{{address?.suburb}}</span>
-            <button class="edit-btn">Edit</button>
-            <button  class="dlt-btn">Delete</button>
+            <button type="button" class="edit-btn">Edit</button>
+            <button type="button"  class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>Postal Code</small><br>
             <span>{{address?.postalCode}}</span>
-            <button  class="edit-btn">Edit</button>
-            <button class="dlt-btn">Delete</button>
+            <button type="button"  class="edit-btn">Edit</button>
+            <button type="button" class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>E-mail</small><br>
             <span>{{contact?.email}}</span>
-            <button (click)="onEmailEdit('ahoj')" class="edit-btn">Edit</button>
-            <button class="dlt-btn">Delete</button>
+            <button type="submit" (click)="onEmailEdit('ahoj')" class="edit-btn">Edit</button>
+            <button type="button" class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>Phone</small><br>
             <span>{{contact?.phoneNumber}}</span>
-            <button (click)="onPhoneEdit('112233')" class="edit-btn">Edit</button>
-            <button class="dlt-btn">Delete</button>
+            <button type="submit" (click)="onPhoneEdit('112233')" class="edit-btn">Edit</button>
+            <button type="button" class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>Social Media</small><br>
             <span>{{socialNetwork?.id}}</span>
-            <button class="edit-btn">Edit</button>
-            <button class="dlt-btn">Delete</button>
+            <button type="button" class="edit-btn">Edit</button>
+            <button type="button" class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <a [href]="socialNetwork?.url" class="socials"></a>
         </div>
-    </div>
+    </form>
     <footer>
-        <button class="second__button logout-btn" (click)="logout()" routerLink="../username">
+        <button class="second__button logout-btn" type="button" (click)="logout()" routerLink="../username">
             Logout
         </button>
     </footer>

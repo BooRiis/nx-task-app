@@ -1,5 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { 
   Data, User, Contact, LocationElement, Address, SocialNetwork,
   AuthService, ApiService, LocalStorageService
@@ -23,14 +24,24 @@ import {
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  formGroup!: FormGroup;
   defaultData!: Observable<Data>;
   user!: User;
   contact!: Contact;
   location!: LocationElement[]; 
   address!: Address;
   socialNetwork!: SocialNetwork;
-  isAuth: boolean;
+  isAuth: boolean;  
+  reactiveForm = new FormGroup({
+    displayName: new FormControl(),
+    firstname: new FormControl(),
+    lastname: new FormControl(),
+    address: new FormGroup({
+      city: new FormControl(),
+      street: new FormControl(),
+      pincode: new FormControl()
+    })
+  })
 
   constructor(
     private authService: AuthService,
@@ -50,6 +61,11 @@ export class ProfileComponent implements OnInit {
       this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
       this.store.pipe(select(getAddress)).subscribe(data => this.address = data)
       this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
+
+    }
+    
+    submitForm(event: Event) {
+      event.preventDefault();
     }
 
   persist(key: string) {
@@ -72,10 +88,10 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  onDisplayNameEdit = (value: string): void => {
+  onDisplayNameEdit = (): void => {
     const newUser: User = ({
       ...this.user,
-      displayName: value
+      displayName: this.reactiveForm.get('displayName')?.value
     })
     
     this.store.dispatch(changeProfile({ user: newUser}))
