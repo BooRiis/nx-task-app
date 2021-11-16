@@ -31,7 +31,13 @@ const _taskReducer = createReducer<ITaskDataState>(
             ...state, 
                 data: {
                     ...state.data,
-                    address
+                    user: {
+                        ...state.data.user,
+                        contact: {
+                            ...state.data.user.contact,
+                            locations: address
+                        }
+                    }
                 },
                 
             })
