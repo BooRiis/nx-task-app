@@ -15,32 +15,37 @@
             <button class="edit-btn">Edit</button>
         </div>
         <div class="user-info">
-            <small>Username</small><br>
-            <span>{{user?.displayName}}</span>
-            <button (click)="onDisplayNameEdit('panBozsky')" class="edit-btn">Edit</button>
+            <div *ngIf="user?.displayName">
+                <small>Username</small><br>
+                <span>{{user?.displayName}}</span>
+                <button (click)="onDisplayNameEdit('')" class="edit-btn">Edit</button>
+            </div>
+            <div *ngIf="!user?.displayName">
+                <input type="text" name="displayName" #displayName="" />
+            </div>
         </div>
         <div class="user-info">
             <small>Address</small><br>
-            <span> {{addres?.streetName}} {{addres?.streetNumber}} </span>
+            <span> {{address?.streetName}} {{address?.streetNumber}} </span>
             <button class="edit-btn">Edit</button>
             <button class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>City</small><br>
-            <span>{{addres?.suburb}}</span>
+            <span>{{address?.suburb}}</span>
             <button class="edit-btn">Edit</button>
             <button  class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>Postal Code</small><br>
-            <span>{{addres?.postalCode}}</span>
-            <button class="edit-btn">Edit</button>
-            <button (click)="addres?.postalCode !== addres?.postalCode" class="dlt-btn">Delete</button>
+            <span>{{address?.postalCode}}</span>
+            <button  class="edit-btn">Edit</button>
+            <button class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">
             <small>E-mail</small><br>
             <span>{{contact?.email}}</span>
-            <button class="edit-btn">Edit</button>
+            <button (click)="onEmailEdit('ahoj')" class="edit-btn">Edit</button>
             <button class="dlt-btn">Delete</button>
         </div>
         <div class="user-info">

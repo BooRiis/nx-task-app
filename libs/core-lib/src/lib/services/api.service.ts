@@ -17,10 +17,6 @@ export class ApiService {
     return this.http.get<Data>(this.url)
   }
 
-  isOnboarded(isOnboarded: boolean) {
-    return this.http.get<Data>(this.url)
-  }
-
   getConfigResponse(): Observable<HttpResponse<Data>> {
     return this.http.get<Data>(this.url, {observe: 'response'})
   }

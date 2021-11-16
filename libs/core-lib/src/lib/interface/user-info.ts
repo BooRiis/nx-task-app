@@ -12,7 +12,6 @@ export interface User {
     password:    string;
     contact:     Contact;
 }
-
 export interface Contact {
     email:          string;
     phoneNumber:    string;

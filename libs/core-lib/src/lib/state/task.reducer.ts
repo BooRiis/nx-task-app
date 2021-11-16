@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store"
-import { Data } from "@task-app/core-lib";
+import { Address, Data, LocationElement } from "../interface";
 import { initialState } from "./task.state"
 import * as TaskActions from './task.actions';
 
@@ -23,7 +23,18 @@ const _taskReducer = createReducer<ITaskDataState>(
                 data: {
                     ...state.data,
                     user
-                }})
+                },
+            })
+    }),
+    on(TaskActions.changeLocation, (state, {address}) => {
+        return ({
+            ...state, 
+                data: {
+                    ...state.data,
+                    address
+                },
+                
+            })
     })
 );
 

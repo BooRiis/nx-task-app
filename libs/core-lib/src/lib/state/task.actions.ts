@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Data, User } from "../interface";
+import { Address, Contact, Data, LocationElement, User } from "../interface";
 
 
 export const LOAD_DATA = '[Username Component] sending data...';
@@ -32,4 +32,10 @@ export const isOnboarded = createAction(
 export const changeProfile = createAction(
     '[Profile change]',
     props<{ user: User}>()
+)
+
+
+export const changeLocation = createAction(
+    '[Profile change]',
+    props<{ address: LocationElement}>()
 )

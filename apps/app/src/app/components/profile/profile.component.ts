@@ -14,6 +14,7 @@ import {
   getUser,
   ITaskDataState,
   changeProfile,
+  changeLocation,
 } from '@task-app/core-lib/state';
 
 @Component({
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit {
   user!: User;
   contact!: Contact;
   location!: LocationElement[]; 
-  addres!: Address;
+  address!: Address;
   socialNetwork!: SocialNetwork;
   isAuth: boolean;
 
@@ -47,7 +48,7 @@ export class ProfileComponent implements OnInit {
         this.user = data
       })
       this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
-      this.store.pipe(select(getAddress)).subscribe(data => this.addres = data)
+      this.store.pipe(select(getAddress)).subscribe(data => this.address = data)
       this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
     }
 
@@ -79,16 +80,41 @@ export class ProfileComponent implements OnInit {
     
     this.store.dispatch(changeProfile({ user: newUser}))
   }
+
   onPhoneEdit = (value: string): void => {
-    const newUser: User = ({
+    const newPhone: User = ({
       ...this.user,
       contact: {
         ...this.user.contact,
         phoneNumber: value
-      }
+      },
     })
 
-    this.store.dispatch(changeProfile({ user: newUser}))
+    this.store.dispatch(changeProfile({ user: newPhone}))
+  }
+
+  onEmailEdit = (value: string): void => {
+    const newEmail: User = ({
+      ...this.user,
+      contact: {
+        ...this.user.contact,
+        email: value
+      },
+    })
+
+    this.store.dispatch(changeProfile({ user: newEmail}))
+  }
+
+  onLocationEdit = (value: string): void => {
+    const newLocation: LocationElement = ({
+      ...this.user.contact.locations[0],
+      address: {
+        ...this.user.contact.locations[0].address,
+        suburb: value
+      },
+    })
+
+    this.store.dispatch(changeLocation({ address: newLocation}))
   }
   
 
