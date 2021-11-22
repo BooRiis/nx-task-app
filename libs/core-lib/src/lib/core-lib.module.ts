@@ -5,6 +5,7 @@ import { AuthService } from './services/auth.service';
 import { DataJsonService } from './services/data-json.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthGuard, ProfileGuard, OnboardingGuard} from './guards'
+import { ProfileFacadeService } from '../lib/facades';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,7 @@ import { AuthGuard, ProfileGuard, OnboardingGuard} from './guards'
     DataJsonService,
     ProfileGuard,
     OnboardingGuard,
+    ProfileFacadeService
   ],
 })
 export class CoreLibModule {}

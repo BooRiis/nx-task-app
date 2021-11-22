@@ -2,22 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { 
-  Data, User, Contact, LocationElement, Address, SocialNetwork,
-  AuthService, ApiService, LocalStorageService
+  User, Contact, LocationElement, Address, SocialNetwork,
+  AuthService, LocalStorageService, ProfileFacadeService
  } from '@task-app/core-lib';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { 
-  getAddress,
-  getContact, 
-  getSocials,
-  getUser,
-  ITaskDataState,
-  changeProfile,
-  changeLocation,
-} from '@task-app/core-lib/state';
-
 @Component({
   selector: 'task-app-profile',
   templateUrl: './profile.component.html',
@@ -25,49 +14,59 @@ import {
 })
 export class ProfileComponent implements OnInit {
   formGroup!: FormGroup;
-  defaultData!: Observable<Data>;
+  user$!: Observable<User>;
   user!: User;
+  contact$!: Observable<Contact>;
   contact!: Contact;
   location!: LocationElement[]; 
   address!: Address;
+  address$!: Observable<Address>;
   socialNetwork!: SocialNetwork;
-  isAuth: boolean;  
+  socialNetwork$!: Observable<SocialNetwork>;
+  isAuth: boolean;
+
+
   reactiveForm = new FormGroup({
+    name: new FormControl(),
+    surname: new FormControl(),
     displayName: new FormControl(),
-    firstname: new FormControl(),
     lastname: new FormControl(),
-    address: new FormGroup({
-      city: new FormControl(),
-      street: new FormControl(),
-      pincode: new FormControl()
-    })
+    email: new FormControl(),
+    phoneNumber: new FormControl(),
+    streetName: new FormControl(),
+    streetNumber: new FormControl(),
+    suburb: new FormControl(),
+    postalCode: new FormControl(),
+    network: new FormControl(),
   })
 
   constructor(
     private authService: AuthService,
-    private api: ApiService,
     private route: Router,
     private localStorage: LocalStorageService,
-    private store: Store<{task: ITaskDataState}>
+    private facade: ProfileFacadeService
     ) {
       this.isAuth = this.authService.getAuth();
     }
     
     ngOnInit(): void {
       //this.showConfig()
-      this.store.pipe(select(getUser)).subscribe(data => {
-        this.user = data
-      })
-      this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
-      this.store.pipe(select(getAddress)).subscribe(data => this.address = data)
-      this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
+      // this.store.pipe(select(getUser)).subscribe(data => {
+      //   this.user = data
+      // })
+      // this.store.pipe(select(getContact)).subscribe(data => this.contact = data)
+      // this.store.pipe(select(getAddress)).subscribe(data => this.address = data)
+      // this.store.pipe(select(getSocials)).subscribe(data => this.socialNetwork = data)
+
+      this.user$ = this.facade.userInit$
+      this.contact$ = this.facade.contactInit$
+      this.address$ = this.facade.addressInit$
+      this.socialNetwork$ = this.facade.socialNetworkInit$
 
     }
-    
-    submitForm(event: Event) {
-      event.preventDefault();
-    }
+  
 
+  //local storage
   persist(key: string) {
     this.localStorage.set(key, this.isAuth)
   }
@@ -88,52 +87,39 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+
+  onNameEdit = (): void => {
+    this.facade.onNameEdit(this.reactiveForm.get('name')?.value, this.reactiveForm.get('surname')?.value)
+  }
+
+  //edit
+
   onDisplayNameEdit = (): void => {
-    const newUser: User = ({
-      ...this.user,
-      displayName: this.reactiveForm.get('displayName')?.value
-    })
-    
-    this.store.dispatch(changeProfile({ user: newUser}))
+    this.facade.onDisplayNameEdit(this.reactiveForm.get('displayName')?.value)
   }
 
-  onPhoneEdit = (value: string): void => {
-    const newPhone: User = ({
-      ...this.user,
-      contact: {
-        ...this.user.contact,
-        phoneNumber: value
-      },
-    })
-
-    this.store.dispatch(changeProfile({ user: newPhone}))
+  onPhoneEdit = (): void => {
+    this.facade.onPhoneEdit(this.reactiveForm.get('phoneNumber')?.value)
   }
 
-  onEmailEdit = (value: string): void => {
-    const newEmail: User = ({
-      ...this.user,
-      contact: {
-        ...this.user.contact,
-        email: value
-      },
-    })
-
-    this.store.dispatch(changeProfile({ user: newEmail}))
+  onEmailEdit = (): void => {
+    this.facade.onEmailEdit(this.reactiveForm.get('email')?.value)
   }
 
-  onLocationEdit = (value: string): void => {
-    const newLocation: LocationElement = ({
-      ...this.user.contact.locations[0],
-      address: {
-        ...this.user.contact.locations[0].address,
-        suburb: value
-      },
-    })
+  onLocationEdit = (): void => {
+    this.facade.onLocationEdit(this.reactiveForm.get('suburb')?.value)
+  }
 
-    const locations: LocationElement[] = Object.assign([], this.user.contact.locations);
-    locations[0] = newLocation;
+  onStreetEdit = (): void => {
+    this.facade.onStreetEdit(this.reactiveForm.get('streetName')?.value, this.reactiveForm.get('streetNumber')?.value)
+  }
 
-    this.store.dispatch(changeLocation({ address: locations}))
+  onPostalCodeEdit = (): void => {
+    this.facade.onPostalCodeEdit(this.reactiveForm.get('postalCode')?.value)
+  }
+
+  onNetworkEdit = (): void => {
+    this.facade.onNetworkEdit(this.reactiveForm.get('network')?.value)
   }
   
 

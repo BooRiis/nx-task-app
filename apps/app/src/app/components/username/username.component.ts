@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Data, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { LocalStorageService, DataJsonService, ApiService, sendingApiData } from '@task-app/core-lib';
+import { LocalStorageService, DataJsonService, sendingApiData, ProfileFacadeService } from '@task-app/core-lib';
 
 
 @Component({
@@ -22,8 +21,7 @@ export class UsernameComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataJsonService: DataJsonService,
     private router: Router,
-    private apiService: ApiService,
-    private store: Store<Data>
+    private facade: ProfileFacadeService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +29,7 @@ export class UsernameComponent implements OnInit {
       displayName: ['']
     })
     this.dataJsonService.loadJson(this.url)
-    this.store.dispatch(sendingApiData({url: this.url}))
+    this.facade.dispatch(sendingApiData({url: this.url}))
   }
 
 

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Address, Contact, Data, LocationElement, User } from "../interface";
+import { Address, Contact, Data, LocationElement, SocialNetwork, User } from "../interface";
 
 
 export const LOAD_DATA = '[Username Component] sending data...';
@@ -38,4 +38,9 @@ export const changeProfile = createAction(
 export const changeLocation = createAction(
     '[Profile change location]',
     props<{ address: LocationElement[]}>()
+)
+
+export const changeNetwork = createAction(
+    '[Profile change network]',
+    props<{ network: SocialNetwork[]}>()
 )

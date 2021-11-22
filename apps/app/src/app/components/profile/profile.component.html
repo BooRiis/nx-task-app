@@ -10,65 +10,93 @@
             <button type="button" (click)="goTo('introduction')">Go to Introduction</button>
         </div>
         <div class="user-info">
-            <small>Name</small><br>
-            <span>{{user?.name}} {{user?.surname}}</span>
-            <button type="button" class="edit-btn">Edit</button>
+            <div>
+                <small>Name</small><br>
+                <span>{{(user$ | async)?.name}} {{(user$ | async)?.surname}}</span>
+                <button type="submit" (click)="onNameEdit()" class="edit-btn">Edit</button>
+            </div>
+            <div *ngIf="!(user$ | async)?.name && !(user$ | async)?.surname">
+                <input type="text" formControlName="name"/><br/>
+                <input type="text" formControlName="surname"/>
+            </div>
         </div>
         <div class="user-info">
-            <div *ngIf="user?.displayName">
+            <div>
                 <small>Username</small><br>
-                <span>{{user?.displayName}}</span>
+                <span>{{(user$ | async)?.displayName}}</span>
                 <button type="submit" (click)="onDisplayNameEdit()" class="edit-btn">Edit</button>
             </div>
-            <div *ngIf="!user?.displayName">
-                <small>Username</small><br>
-                <input type="text" name="displayName" id="DisplayName" formControlName="displayName" />
-                <button type="button" class="edit-btn">Edit</button>
+            <div *ngIf="!(user$ | async)?.displayName">
+                <input type="text" formControlName="displayName" />
             </div>
         </div>
         <div class="user-info">
-            <small>Address</small><br>
-            <span> {{address?.streetName}} {{address?.streetNumber}} </span>
-            <button type="button" class="edit-btn">Edit</button>
-            <button type="button" class="dlt-btn">Delete</button>
+            <div>
+                <small>Address</small><br>
+                <span> {{(address$ | async)?.streetName}} {{(address$ | async)?.streetNumber}} </span>
+                <button type="submit" (click)="onStreetEdit()" class="edit-btn">Edit</button>
+                <button type="button" class="dlt-btn">Delete</button>
+            </div>
+            <div *ngIf="!(address$ | async)?.streetName && !(address$ | async)?.streetNumber">
+                <input type="text" formControlName="streetName"/><br/>
+                <input type="text" formControlName="streetNumber"/>
+            </div>
         </div>
         <div class="user-info">
-            <small>City</small><br>
-            <span>{{address?.suburb}}</span>
-<<<<<<< HEAD
-            <button type="button" class="edit-btn">Edit</button>
-            <button type="button"  class="dlt-btn">Delete</button>
-=======
-            <button (click)="onLocationEdit('Brno')"  class="edit-btn">Edit</button>
-            <button  class="dlt-btn">Delete</button>
->>>>>>> 296aa93e122ea1b3744e73abdd972ad0a0b58eb3
+            <div>
+                <small>City</small><br>
+                <span>{{(address$ | async)?.suburb}}</span>
+                <button type="submit" (click)="onLocationEdit()" class="edit-btn">Edit</button>
+                <button type="button"  class="dlt-btn">Delete</button>
+            </div>
+            <div *ngIf="!(address$ | async)?.suburb">
+                <input type="text" formControlName="suburb" />
+            </div>
         </div>
         <div class="user-info">
-            <small>Postal Code</small><br>
-            <span>{{address?.postalCode}}</span>
-            <button type="button"  class="edit-btn">Edit</button>
-            <button type="button" class="dlt-btn">Delete</button>
+            <div>
+                <small>Postal Code</small><br>
+                <span>{{(address$ | async)?.postalCode}}</span>
+                <button type="submit" (click)="onPostalCodeEdit()"  class="edit-btn">Edit</button>
+                <button type="button" class="dlt-btn">Delete</button>
+            </div>
+            <div *ngIf="!(address$ | async)?.postalCode">
+                <input type="text" formControlName="postalCode" />
+            </div>
         </div>
         <div class="user-info">
-            <small>E-mail</small><br>
-            <span>{{contact?.email}}</span>
-            <button type="submit" (click)="onEmailEdit('ahoj')" class="edit-btn">Edit</button>
-            <button type="button" class="dlt-btn">Delete</button>
+            <div>
+                <small>E-mail</small><br>
+                <span>{{(contact$ | async)?.email}}</span>
+                <button type="submit" (click)="onEmailEdit()" class="edit-btn">Edit</button>
+                <button type="button" class="dlt-btn">Delete</button>
+            </div>
+            <div *ngIf="!(contact$ | async)?.email">
+                <input type="email" formControlName="email" />
+            </div>
         </div>
         <div class="user-info">
             <small>Phone</small><br>
-            <span>{{contact?.phoneNumber}}</span>
-            <button type="submit" (click)="onPhoneEdit('112233')" class="edit-btn">Edit</button>
+            <span>{{(contact$ | async)?.phoneNumber}}</span>
+            <button type="submit" (click)="onPhoneEdit()" class="edit-btn">Edit</button>
             <button type="button" class="dlt-btn">Delete</button>
+            <div *ngIf="!(contact$ | async)?.phoneNumber">
+                <input type="tel" formControlName="phoneNumber" />
+            </div>
         </div>
         <div class="user-info">
-            <small>Social Media</small><br>
-            <span>{{socialNetwork?.id}}</span>
-            <button type="button" class="edit-btn">Edit</button>
-            <button type="button" class="dlt-btn">Delete</button>
+            <div>
+                <small>Social Media</small><br>
+                <span>{{(socialNetwork$ | async)?.id}}</span>
+                <button type="submit" (click)="onNetworkEdit()" class="edit-btn">Edit</button>
+                <button type="button" class="dlt-btn">Delete</button>
+            </div>
+            <div *ngIf="!(socialNetwork$ | async)?.id">
+                <input type="text" formControlName="network" />
+            </div>
         </div>
         <div class="user-info">
-            <a [href]="socialNetwork?.url" class="socials"></a>
+            <a [href]="(socialNetwork$ | async)?.url" class="socials"></a>
         </div>
     </form>
     <footer>

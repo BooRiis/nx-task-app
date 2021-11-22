@@ -41,6 +41,22 @@ const _taskReducer = createReducer<ITaskDataState>(
                 },
                 
             })
+    }),
+    on(TaskActions.changeNetwork, (state, {network}) => {
+        return ({
+            ...state, 
+                data: {
+                    ...state.data,
+                    user: {
+                        ...state.data.user,
+                        contact: {
+                            ...state.data.user.contact,
+                            socialNetworks: network
+                        }
+                    }
+                },
+                
+            })
     })
 );
 
